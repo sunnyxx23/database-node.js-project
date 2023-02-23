@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/assets/style.css">
+    <title>(32) PA SNICKERI</title>
+</head>
+<body>
+    <nav id="main-nav">PA SNICKERI | home | boka | kontakt</nav>
+
+
+
+
+
+    <% data.forEach(function (post) { %>
+        <% if(post.z != ''){ %>
+        <img src="<%= post.z %>">
+        <% } %> 
+        <%= post.x %>
+        <%= post.date %>
+        <p><%= post.y %></p>
+<% }) %>
+
+</body>
+</html>
