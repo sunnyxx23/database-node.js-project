@@ -3,27 +3,69 @@ const app = express();
 const db = require('./connection');
 app.set('view engine', 'ejs');
 
+const sessions = require('express-session');
+//username and password
+const myusername = 'user1'
+const mypassword = 'mypassword'
+
+// a variable to save a session
+var session;
+
 const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 const path = require('path');
 const upload = require('./uploads');
 app.use(express.static(path.resolve('./public')));
 
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+app.get('/login',(req,res) => {
+    session=req.session;
+    if(session.userid){
+        res.send("Welcome User <a href=\'/logout'>click to logout</a>");
+    } else {
+        res.render('login')
+    }
+});
+
+app.post('/user',(req,res) => {
+    let sql = 'SELECT * FROM users WHERE username = ? AND password = ?'
+    db.query(sql, [req.body.username, req.body.password], function(err, result){
+        if (err){
+            throw err;
+        }   else {
+            if(req.body.username == result[0].username && req.body.password == result[0].password){
+                session=req.session;
+                session.userid=req.body.username;
+                console.log(req.session)
+                res.render(`user`);
+            }
+            else{
+                res.send('Invalid username or password');
+            }
+        }
+    })
+    
+})
+
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
 
 var obj = {};
 
-
 app.get('/', function(req,res){
+    if (req.session.userid) {
+        console.log(req.session.userid)
+    }
     res.render("post")
-/*   let sql = 'SELECT * FROM project ORDER BY id DESC';
-   db.query(sql, function(err, results){    
-       if(err) {
-           throw err;
-       } else {
-           obj = {data: results};
-           res.render('index', obj)
-       }
-   });*/
 });
 
 app.get('/post', function(req,res){
