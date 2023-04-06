@@ -9,7 +9,13 @@
     <title>Life Blood</title>
 </head>
 <body>
+    <a id="homebtn" href="/post">Home</a><br>
 
+    <% data.forEach(function (post) { %>
+        <%= post.fname %>
+        <%= post.lname %><br>
+        <%= post.pnummer%><br>
+<% }) %>
 
 </body>
 </html>

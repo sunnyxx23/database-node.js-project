@@ -41,16 +41,18 @@ app.get('/search', function(req,res){
  });
 
 app.post('/search', function(req, res){
-    let sql = 'SELECT * FROM project WHERE '+req.body.searchBy+' LIKE ?'
-
-    db.query(sql, '%'+req.body.searchQuery+'%', function(err, results){
-        if(err) {
+    //let sql = 'SELECT * FROM project WHERE ? LIKE ?'
+    let sql = "SELECT * FROM project WHERE " + req.body.searchQuery + " LIKE '" + req.body.searchBy + "'";
+    console.log(sql);
+    //db.query(sql, ['%'+req.body.searchBy+'%', req.body.searchQuery], function(err, results){
+    db.query(sql, function(err, results){
+            if(err) {
             throw err;
         } else {
             console.log(results);
             console.log('Filtered content');
             obj = {data: results};
-            res.render('index', obj);
+            res.render('results', obj);
         }
     });
 });
