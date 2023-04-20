@@ -27,6 +27,7 @@ app.use(sessions({
 
 app.get('/login',(req,res) => {
     session=req.session;
+    console.log(session)
     if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     } else {
@@ -35,6 +36,7 @@ app.get('/login',(req,res) => {
 });
 
 app.post('/user',(req,res) => {
+    console.log(session)
     let sql = 'SELECT * FROM users WHERE username = ? AND password = ?'
     db.query(sql, [req.body.username, req.body.password], function(err, result){
         if (err){
@@ -62,6 +64,9 @@ app.get('/logout',(req,res) => {
 var obj = {};
 
 app.get('/', function(req,res){
+    console.log("req.session")
+    console.log(req.session)
+
     if (req.session.userid) {
         console.log(req.session.userid)
     }
@@ -79,7 +84,14 @@ app.listen(process.env.PORT || 3000, function(){
 });
 
 app.get('/search', function(req,res){
-    res.render('search')
+    console.log(req.session)
+    if(req.session.userid){
+        res.render('search')
+
+    }else (
+        res.redirect('login')
+    )
+    
  });
 
 app.post('/search', async function(req, res){
