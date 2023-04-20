@@ -65,7 +65,7 @@ app.get('/', function(req,res){
     if (req.session.userid) {
         console.log(req.session.userid)
     }
-    res.render("post")
+    res.render("index")
 });
 
 app.get('/post', function(req,res){
@@ -82,11 +82,10 @@ app.get('/search', function(req,res){
     res.render('search')
  });
 
-app.post('/search', function(req, res){
-    //let sql = 'SELECT * FROM project WHERE ? LIKE ?'
-    let sql = "SELECT * FROM project WHERE " + req.body.searchQuery + " LIKE '" + req.body.searchBy + "'";
+app.post('/search', async function(req, res){
+   try{
+    let sql = "SELECT * FROM donors WHERE " + req.body.searchBy + " LIKE '" + req.body.searchQuery + "'";
     console.log(sql);
-    //db.query(sql, ['%'+req.body.searchBy+'%', req.body.searchQuery], function(err, results){
     db.query(sql, function(err, results){
             if(err) {
             throw err;
@@ -97,8 +96,11 @@ app.post('/search', function(req, res){
             res.render('results', obj);
         }
     });
+}
+    catch{
+        res.render('search')
+    }
 });
-
 
 app.post('/submitted', function(req,res){
     const fname = req.body.fname;
@@ -112,7 +114,7 @@ app.post('/submitted', function(req,res){
         bdis = 0;
     }
    
-   const sqlInstert = "INSERT INTO project (fname, lname, pnummer, btype, bdis) VALUES (?, ?, ?, ?, ?);"
+   const sqlInstert = "INSERT INTO donors (fname, lname, pnummer, btype, bdis) VALUES (?, ?, ?, ?, ?);"
    
    db.query(sqlInstert, [fname, lname, pnummer, btype, bdis], (err, result)=> {
        if(err) {
