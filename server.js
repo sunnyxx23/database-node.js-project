@@ -20,7 +20,7 @@ app.use(express.static(path.resolve('./public')));
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
+    saveUninitialized: true,
     cookie: { maxAge: oneDay },
     resave: false 
 }));
@@ -31,29 +31,34 @@ app.get('/login',(req,res) => {
     if(session.userid){
         res.send("Welcome User <a href=\'/logout'>click to logout</a>");
     } else {
-        res.render('login')
+        res.render('login', {data: ''})
     }
 });
 
 app.post('/user',(req,res) => {
-    console.log(session)
+    console.log(req.body.username)
     let sql = 'SELECT * FROM users WHERE username = ? AND password = ?'
     db.query(sql, [req.body.username, req.body.password], function(err, result){
         if (err){
-            throw err;
         }   else {
-            if(req.body.username == result[0].username && req.body.password == result[0].password){
+            if (result == "") {
+                res.render('login', {data: {status:'wrong user/pass'}});
+            }
+            else if(req.body.username == result[0].username && req.body.password == result[0].password){
                 session=req.session;
                 session.userid=req.body.username;
                 console.log(req.session)
-                res.render(`user`);
+                res.render('user', { username: req.body.username });
             }
-            else{
-                res.send('Invalid username or password');
-            }
+            
         }
-    })
-    
+       })
+  
+})
+
+app.get('/user', (req,res) => {
+    const username = req.session.userid
+    res.render('user', {username});
 })
 
 app.get('/logout',(req,res) => {
@@ -70,7 +75,10 @@ app.get('/', function(req,res){
     if (req.session.userid) {
         console.log(req.session.userid)
     }
-    res.render("index")
+    obj = {}
+    if (req.session.userid)
+        obj = {session: req.session.userid}
+    res.render("index", obj)
 });
 
 app.get('/post', function(req,res){
@@ -81,6 +89,11 @@ app.get('/post', function(req,res){
 
 app.listen(process.env.PORT || 3000, function(){
    console.log('server, port 3000');
+});
+
+app.get('/logout',(req,res) => {
+    req.session.destroy();
+    res.redirect("/");
 });
 
 app.get('/search', function(req,res){
@@ -120,6 +133,12 @@ app.post('/submitted', function(req,res){
     const pnummer = req.body.pnummer;
     const btype = req.body.btype;
     var bdis = "";
+    if (hasNumber(fname) && hasNumber(lname)){
+        res.redirect(req.get('referer'));
+        // insert sleep(do nothing) 5 sec
+        // redirect to register page
+
+    }
     if(req.body.bdis == "on"){
         bdis = 1;
     } else {
@@ -135,5 +154,10 @@ app.post('/submitted', function(req,res){
            res.render('sucess');
        }
    });
-   
+
 });
+
+function hasNumber(myString) {
+    return /\d/.test(myString);
+  }
+  

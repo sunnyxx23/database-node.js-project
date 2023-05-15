@@ -1,9 +1,9 @@
 *{
     background-color: #faf0e6;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 0;
-    padding: 0;
+
     box-sizing: border-box;
+    list-style-type: none;
 }
 
 #homebtn{
@@ -22,6 +22,7 @@
 
 #homebtn:hover{
     background-color: #f4e1c4;
+    
 }
 
 #main-header{
@@ -52,6 +53,10 @@
     background-color: #f4e1c4;
 }
 
+#donobtn{
+    font-size: 30px;
+}
+
 .flex-container{
     display: flex;
     gap: 30px;
@@ -63,5 +68,31 @@
     height:100%;
     align-items: center;
     border-style: solid;
-    border-color: aqua;
+    border-color: red;
+}
+
+#right{
+    display: flex;
+    align-items: center;
+}
+
+.card {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border: 5px solid #333;
+    margin: 5px;
+}
+
+
+@media (max-width: 500px){
+    .flex-container{
+        display: flex;
+        flex-direction: row;
+        margin: 0;
+    }
+    #head-con{
+        padding-bottom: 1vh;
+    }
+
 }

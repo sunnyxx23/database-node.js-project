@@ -11,7 +11,9 @@
 <body>
     <header id="main-header">
         <h1 id="welcome-header">Welcome to Life Blood!<br>The best Blood Donation Service!</br></h1>
-        <a id="loginbtn" href="/login">Login as Admin</a>
+        <!--<a id="loginbtn" href="/login">Login as Admin</a>-->
+        <li id="right"><% if (typeof(session) != "string") { %> <a href="./login">LOGIN</a> <% } %><% if (typeof(session) == "string") { %> <a href="./logout">LOGOUT</a> <% } %></li>
+        <li id="right"><% if (typeof(session) == "string") { %> <p> <a href="/user">Admin</a>: <%= session %></p> <% } %></li>
     </header>
 
   <!-- Flex container -->
@@ -20,14 +22,16 @@
     <!-- Flex item med universellt ID -->
     <div class="flex-item" id="container-1-left">
       <h3 id="head-con">Review 1</h3>
-      <p>Lorem ipsum dolor sit, Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia laboriosam quis quasi dicta maxime soluta aliquid, unde saepe adipisci officiis labore dolore doloremque, nemo impedit corrupti ea, nam similique iste quod! Magni doloremque at reprehenderit accusantium. Corporis cupiditate mollitia, perferendis dolor sed iure. Suscipit consequuntur ad impedit incidunt, magnam ipsam! amet consectetur adipisicing elit. Itaque, eveniet cumque officiis voluptatibus repellendus quae excepturi dignissimos libero expedita incidunt, velit earum voluptate! Expedita, quo? Similique impedit sint vero accusamus!
+      <p>I recently donated blood with Life Blood and I was extremely impressed with their professionalism and organization. From the moment I walked in, I felt welcomed and comfortable. The staff were knowledgeable and made me feel at ease throughout the process. The donation itself was quick and painless, and I left feeling proud to have made a difference in someone's life. I would highly recommend Life Blood to anyone looking to donate and make a positive impact in their community
       </p>
     </div>
 
     <!-- Flex item med personligt ID -->
     <div class="flex-item" id="container-2-mid">
       <h3 id="head-con">Start donating now!</h3>
-      <p>Här är innehållet för personligt ID Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis ipsum officiis culpa, sapiente dolorum ut, sed eligendi vitae hic odit praesentium quia illo adipisci ea assumenda temporibus neque, magnam nam impedit perferendis! Delectus veritatis suscipit repellendus distinctio ut animi rerum, dolores consectetur perspiciatis magnam consequuntur tempora a aliquid temporibus libero ullam quibusdam magni, voluptatibus aut sequi, soluta illo ducimus est ex. Voluptas, quo. Sit perspiciatis odio voluptatibus nam nisi, illo eligendi aperiam! Dolores a natus reiciendis corrupti similique, cumque vel quia! Sit, sequi officia quod alias voluptate deleniti temporibus, repellendus, aut molestiae enim dolorem ducimus fugiat. Voluptas expedita incidunt quos.<br></br>
+      <p>
+        Life Blood is an excellent choice for blood donation, as they are committed to safety and quality, make the donation process easy and convenient with online booking, are dedicated to making a difference in their community, and provide a selfless act that can make a big impact. By donating through them, you can feel good about yourself and the positive impact you are making on the lives of others.
+        <br></br>
         <a id="donobtn" href="/post">Donate Today!</a>
       </p>
     </div>
@@ -35,7 +39,9 @@
     <!-- Flex item med personligt ID -->
     <div class="flex-item" id="container-3-right">
       <h3 id="head-con">Review 2</h3>
-      <p>Lorem ipsum dolor sit Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, rerum cumque. Commodi cupiditate quis, illum quo sit eos rem vitae nisi repudiandae nemo quae. Ad ducimus numquam dolores suscipit sed quis possimus iste eos ut consequatur eius dolorem consectetur nisi nostrum ipsam adipisci cupiditate harum iusto, debitis corrupti, itaque quas tenetur. Labore, aliquid? A, hic impedit! Cumque voluptate at, excepturi repellendus sint quaerat accusantium eius vero esse molestiae nisi quidem repellat laborum doloribus quas distinctio ipsa necessitatibus ut voluptatibus, iste pariatur autem doloremque voluptas officia! Quis ea voluptas quo nihil, repellat odio corporis repellendus eos ducimus, accusantium adipisci esse ut. amet consectetur adipisicing elit. Aperiam aspernatur id doloremque, quisquam odio odit ea nobis porro praesentium nostrum minima a obcaecati eos omnis voluptates. Ex in veniam accusamus?</p>
+      <p>
+        Life Blood is an exceptional blood donation company that truly cares about their donors and recipients. I have been donating with them for years and have always had a positive experience. The staff are friendly and helpful, and the donation process is easy and efficient. It's great to know that my donation is going towards saving lives and making a difference in the world. I would encourage anyone who is able to donate to consider choosing Life Blood for their next donation.
+      </p>
     </div>
 
   </div>

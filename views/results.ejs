@@ -21,9 +21,11 @@
         <button type="submit">Search</button>
     </form>
     <% data.forEach(function (post) { %>
-        <%= post.fname %>
-        <%= post.lname %><br>
-        <%= post.pnummer%><br>
+        <div class="card">
+            <p id="fname"><%= post.fname %></p>
+            <p id="lname"><%= post.lname %> </p>
+            <p id="pnummer"><%= post.pnummer%></p>
+        </div>
 <% }) %>
 
 </body>
