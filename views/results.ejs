@@ -22,9 +22,10 @@
     </form>
     <% data.forEach(function (post) { %>
         <div class="card">
-            <p id="fname"><%= post.fname %></p>
-            <p id="lname"><%= post.lname %> </p>
+            <p id="fname"><%= post.fname %> <%= post.lname %></p>
             <p id="pnummer"><%= post.pnummer%></p>
+            <p id="btype"><%= post.btype%></p>
+            <p id="bdis"><%= post.bdis%></p>
         </div>
 <% }) %>
 

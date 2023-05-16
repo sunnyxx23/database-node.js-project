@@ -77,13 +77,16 @@
 }
 
 .card {
-    display: flex;
-    position: relative;
-    flex-direction: column;
+    margin-left: 5vh;
+    margin-right: 5vh;
+    margin-top: 2vh;
+    display: flex; /* Display the card as a flex container */
+    flex-direction: row; /* Set the flex direction to row */
+    justify-content: space-between; /* Align the content evenly along the row */
     border: 5px solid #333;
-    margin: 5px;
+}   p {
+    margin: 2rem; /* Remove default margins from paragraphs */
 }
-
 
 @media (max-width: 500px){
     .flex-container{
